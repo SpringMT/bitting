@@ -1,0 +1,31 @@
+LineLength:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+RedundantSelf:
+  Enabled: false
+
+BracesAroundHashParameters:
+  Enabled: false
+
+# Avoid methods longer than 10 lines of code
+MethodLength:
+  Max: 50
+
+AsciiComments:
+  Enabled: false
+
+CyclomaticComplexity:
+  Max: 10
+  
+# don't enforce arbitrary max class length
+ClassLength:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+SignalException:
+  Enabled: false
