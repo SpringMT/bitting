@@ -20,6 +20,7 @@ class RubocopApplication
     @repos_name  = body_json['repository']['name']
     @branch_name = body_json['pull_request']['head']['ref']
     @html_url    = body_json['pull_request']['html_url']
+    @sender      = body_json['pull_request']['user']['login']
     @response    = [ 200, { 'Content-Type' => 'text/plain' }, ['NOTHING'] ]
 
     Dir.chdir "./tmp" do
@@ -61,7 +62,7 @@ class RubocopApplication
       req["Authorization"] = "token #{TOKEN}"
       req.body = {
         title: "Automatic PR. Rubocopnilzed PR from #{PROJECT}",
-        body: "Rubocop Result for #{@html_url}",
+        body: "@#{@sender} Rubocop Result for #{@html_url}",
         head: "#{PROJECT}:#{@branch_name}_rubocop",
         base: "#{@branch_name}"
       }.to_json
