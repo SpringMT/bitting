@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - 'spec/**/*'
+
 AsciiComments:
   Enabled: false
 
@@ -35,3 +39,7 @@ RedundantSelf:
 
 SignalException:
   Enabled: false
+
+TrailingCommaInLiteral:
+  Enabled: false
+
