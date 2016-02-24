@@ -1,7 +1,3 @@
-AllCops:
-  Exclude:
-    - 'spec/**/*'
-
 AsciiComments:
   Enabled: false
 
