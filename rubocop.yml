@@ -1,41 +1,33 @@
-AsciiComments:
+Metrics/ClassLength:
   Enabled: false
 
-BracesAroundHashParameters:
-  Enabled: false
-
-ClassAndModuleChildren:
-  Enabled: false
-
-# don't enforce arbitrary max class length
-ClassLength:
-  Enabled: false
-
-CyclomaticComplexity:
+Metrics/CyclomaticComplexity:
   Max: 10
 
-Documentation:
+Metrics/LineLength:
   Enabled: false
 
-LineLength:
-  Enabled: false
-
-# Avoid methods longer than 10 lines of code
-MethodLength:
+Metrics/MethodLength:
   Max: 50
 
-# Avoid parameter lists longer than 5 parameters.
-ParameterLists:
-  Max: 5
-  CountKeywordArgs: false
-  Enabled: true
-
-RedundantSelf:
+Style/AsciiComments:
   Enabled: false
 
-SignalException:
+Style/BracesAroundHashParameters:
   Enabled: false
 
-TrailingCommaInLiteral:
-  EnforcedStyleForMultiline: comma
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
 

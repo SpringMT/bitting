@@ -4,3 +4,4 @@ vendor
 out.log
 
 !.gitkeep
+.ruby-version
