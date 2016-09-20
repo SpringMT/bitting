@@ -11,7 +11,6 @@ class RubocopJob
   STDOUT.sync = true
 
   def perform(*args)
-    p args
     queue = JSON.parse(args.first)
 
     @organization    = queue['organization']
