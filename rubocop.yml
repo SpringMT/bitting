@@ -1,6 +1,8 @@
+# don't enforce arbitrary max class length
 Metrics/ClassLength:
   Enabled: false
 
+# 10位にしておく
 Metrics/CyclomaticComplexity:
   Max: 10
 
@@ -10,21 +12,26 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 50
 
+# 日本語のコメントを許可する
 Style/AsciiComments:
   Enabled: false
 
+# option 等、明示的にハッシュにした方が分かりやすい場合もある
 Style/BracesAroundHashParameters:
   Enabled: false
 
+# namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
 Style/ClassAndModuleChildren:
   Enabled: false
 
+# ドキュメントの無い public class を許可する
 Style/Documentation:
   Enabled: false
 
 Style/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+# ローカル変数とメソッド呼び出しの区別をつけた方が分かりやすい場合が多い
 Style/RedundantSelf:
   Enabled: false
 
