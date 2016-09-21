@@ -4,3 +4,6 @@ vendor
 out.log
 
 !.gitkeep
+.ruby-version
+.env
+dump.rdb

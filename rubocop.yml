@@ -1,41 +1,40 @@
-AsciiComments:
-  Enabled: false
-
-BracesAroundHashParameters:
-  Enabled: false
-
-ClassAndModuleChildren:
-  Enabled: false
-
 # don't enforce arbitrary max class length
-ClassLength:
+Metrics/ClassLength:
   Enabled: false
 
-CyclomaticComplexity:
+# 10位にしておく
+Metrics/CyclomaticComplexity:
   Max: 10
 
-Documentation:
+Metrics/LineLength:
   Enabled: false
 
-LineLength:
-  Enabled: false
-
-# Avoid methods longer than 10 lines of code
-MethodLength:
+Metrics/MethodLength:
   Max: 50
 
-# Avoid parameter lists longer than 5 parameters.
-ParameterLists:
-  Max: 5
-  CountKeywordArgs: false
-  Enabled: true
-
-RedundantSelf:
+# 日本語のコメントを許可する
+Style/AsciiComments:
   Enabled: false
 
-SignalException:
+# option 等、明示的にハッシュにした方が分かりやすい場合もある
+Style/BracesAroundHashParameters:
   Enabled: false
 
-TrailingCommaInLiteral:
-  EnforcedStyleForMultiline: comma
+# namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# ドキュメントの無い public class を許可する
+Style/Documentation:
+  Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# ローカル変数とメソッド呼び出しの区別をつけた方が分かりやすい場合が多い
+Style/RedundantSelf:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
 
