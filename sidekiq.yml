@@ -3,4 +3,4 @@
 :pidfile: tmp/sidekiq.pid
 :concurrency: 2
 :queues:
-  - default
+  - bitting

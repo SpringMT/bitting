@@ -1,9 +1,14 @@
 require 'sidekiq/worker'
 require 'json'
+require 'sidekiq'
+
+Sidekiq.configure_server do |config|
+  config.redis = { url: 'redis://127.0.0.1:6379', namespace: 'sidekiq' }
+end
 
 class RubocopJob
   include Sidekiq::Worker
-  sidekiq_options retry: false
+  sidekiq_options queue: :bitting, retry: false, backtrace: true
 
   TOKEN                = ENV['TOKEN']
   GITHUB_HOST          = ENV['GITHUB_HOST'] || 'github.com'
