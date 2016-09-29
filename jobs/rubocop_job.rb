@@ -53,7 +53,17 @@ class RubocopJob
     end
     return [ 200, { 'Content-Type' => 'text/plain' }, ['target file empty'] ] if target_files.empty?
 
-    `../../bin/rubocop -a -D -c ../../rubocop.yml #{target_files.join(' ')}`
+    rubocop_file = '../../rubocop.yml'
+    local_rubocop_file = './.rubocop.yml'
+    title_specifix_rubocop_file = "../../#{@repos_name}_rubocop.yml"
+    if File.exist?(local_rubocop_file)
+      rubocop_file = local_rubocop_file
+    elsif File.exist?(title_specifix_rubocop_file)
+      rubocop_file = title_specifix_rubocop_file
+    else
+
+    end
+    `../../bin/rubocop -a -D -c #{rubocop_file} #{target_files.join(' ')}`
     commit_result = `git commit -am 'rubocop'`
 
     return [ 200, { 'Content-Type' => 'text/plain' }, ['UNNECESSARY RUBOCOP PERFECT!'] ] if commit_result.match(/nothing to commit \(working directory clean\)/)
