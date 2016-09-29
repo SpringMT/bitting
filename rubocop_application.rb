@@ -4,7 +4,7 @@ require 'json'
 class RubocopApplication
   def call(env)
     body_json = JSON.parse(env["rack.input"].gets)
-    organization = body_json['organization']['login']
+    organization = body_json.dig('organization', 'login')
 
     return [ 200, { 'Content-Type' => 'text/plain' }, ['ONLY ALOW PULL REQUEST'] ] unless env['HTTP_X_GITHUB_EVENT'] == 'pull_request'
     return [ 200, { 'Content-Type' => 'text/plain' }, ['THE PR IS NOT OPENED'] ] if body_json["action"] != "opened"
