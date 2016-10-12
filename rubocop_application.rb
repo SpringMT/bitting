@@ -20,7 +20,8 @@ class RubocopApplication
       html_url:        body_json['pull_request']['html_url'],
       sender:          body_json['pull_request']['user']['login']
     }.to_json
-    RubocopJob.perform_async(queue)
+    #RubocopJob.perform_async(queue)
+    Resque.enqueue(RubocopJob, queue)
     [ 200, { 'Content-Type' => 'text/plain' }, ['SUCCESS'] ]
   end
 end
