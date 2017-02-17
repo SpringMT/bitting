@@ -1,7 +1,7 @@
 require 'rubocop'
 require 'json'
 
-class RubocopApplication
+class BundleUpdateApplication
   def call(env)
     body_json = JSON.parse(env["rack.input"].gets)
     organization = body_json.dig('organization', 'login')
@@ -21,8 +21,7 @@ class RubocopApplication
       html_url:        body_json['pull_request']['html_url'],
       sender:          body_json['pull_request']['user']['login']
     }.to_json
-    #RubocopJob.perform_async(queue)
-    Resque.enqueue(RubocopJob, queue)
+    Resque.enqueue(BundleUpdateJob, queue)
     [ 200, { 'Content-Type' => 'text/plain' }, ['SUCCESS'] ]
   end
 end
