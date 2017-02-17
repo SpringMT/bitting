@@ -1,6 +1,7 @@
 require 'json'
 require 'resque'
 require 'compare_linker'
+require 'bundler'
 
 Resque.redis = 'redis://127.0.0.1:6379'
 Resque.redis.namespace = "resque-hook"
@@ -47,8 +48,10 @@ class BundleUpdateJob
     `git checkout #{branch_name}`
 
     old_lockfile = Bundler::LockfileParser.new(Bundler.read_file("Gemfile.lock"))
-    `bundle install --path=vendor/bundle`
-    `bundle update`
+    Bundler.with_clean_env do
+      `bundle install --gemfile Gemfile --path vendor/bundle`
+      `bundle update`
+    end
     new_lockfile = Bundler::LockfileParser.new(Bundler.read_file("Gemfile.lock"))
 
     octokit ||= Octokit::Client.new(access_token: ENV["BUNDLE_UPDATE_OCTOKIT_ACCESS_TOKEN"])
@@ -86,18 +89,20 @@ class BundleUpdateJob
     end
 
     commit_result = `git commit -am 'bundle update'`
-
+    
     return [ 200, { 'Content-Type' => 'text/plain' }, ['UNNECESSARY RUBOCOP PERFECT!'] ] if commit_result.match(/nothing to commit \(working directory clean\)/)
 
-    p `git checkout -b #{branch_name}_bundle_update`
-    p `git push origin #{branch_name}_bundle_update`
+    `git checkout -b #{branch_name}_bundle_update`
+    `git push origin #{branch_name}_bundle_update`
 
+    https = Net::HTTP.new(GITHUB_HOST, '443')
+    https.use_ssl = true
     https.start do |h|
       req = Net::HTTP::Post.new("#{GITHUB_API_BASE_PATH}/#{full_repos_name}/pulls")
       req["Authorization"] = "token #{TOKEN}"
       req.body = {
         title: "[Automatic PR] Bundle Update PR from #{full_repos_name}",
-        body: "@#{sender} bundle update result for #{html_url} \n#{compare_links}",
+        body: "@#{sender} bundle update result for #{html_url} \n#{compare_links.to_a.join("\n")}",
         head: "#{organization}:#{branch_name}_bundle_update",
         base: "#{branch_name}"
       }.to_json

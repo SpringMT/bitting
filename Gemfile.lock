@@ -69,6 +69,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   compare_linker
   foreman
   rack

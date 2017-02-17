@@ -1,5 +1,6 @@
 require './rubocop_application.rb'
 require './hello_application.rb'
+require './bundle_update_application.rb'
 require 'resque'
 require 'resque/server'
 require 'rack-lineprof'
