@@ -86,7 +86,7 @@ class RubocopJob
       req = Net::HTTP::Post.new("#{GITHUB_API_BASE_PATH}/#{full_repos_name}/pulls")
       req["Authorization"] = "token #{TOKEN}"
       req.body = {
-        title: "Automatic PR. Rubocopnilzed PR from #{full_repos_name}",
+        title: "[Automatic PR] Rubocopnilzed PR from #{full_repos_name}",
         body: "@#{sender} Rubocop Result for #{html_url}",
         head: "#{organization}:#{branch_name}_rubocop",
         base: "#{branch_name}"

@@ -17,9 +17,10 @@ Resque.redis.namespace = "resque-hook"
 #use Rack::Lineprof
 
 run Rack::URLMap.new(
-  '/'        => RubocopApplication.new,
-  '/resque'  => Resque::Server.new,
-  '/hello'   => HelloApplication.new,
-  '/favicon.ico' => HelloApplication.new
+  '/'              => RubocopApplication.new,
+  '/bundle_update' => BundleUpdateApplication.new,
+  '/resque'        => Resque::Server.new,
+  '/hello'         => HelloApplication.new,
+  '/favicon.ico'   => HelloApplication.new
 )
 
